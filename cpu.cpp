@@ -28,6 +28,7 @@ VE_VMS_CPU::VE_VMS_CPU(VE_VMS_RAM *_ram, VE_VMS_ROM *_rom, VE_VMS_FLASH *_flash,
 	interruptLevel = 0;
 	currentInterrupt = 0;
 	interruptsMasked = false;
+	instructionCount = 0;
 	
 	ram = _ram;
 	rom = _rom;

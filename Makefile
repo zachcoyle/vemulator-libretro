@@ -116,23 +116,22 @@ SRC := *.cpp
 CFLAGS += -Wall -pedantic $(fpic)
 
 ifneq (,$(findstring qnx,$(platform)))
-CFLAGS += -Wc,-std=c++99
+CFLAGS += -Wc,-std=c++98
 else
-CFLAGS += -std=gnu++99
+CFLAGS += -std=c++98
 endif
 
-all: $(TARGET)
+all:
 
-$(TARGET): $(SRC)
 ifeq ($(STATIC_LINKING), 1)
-	$(AR) rcs $@ $(SRC)
+	$(AR) rcs ${TARGET} $(SRC)
 else
-	$(CC) $(fpic) $(SHARED) $(SRC) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) $(fpic) $(SHARED) $(SRC) $(LDFLAGS) -o ${TARGET}
 endif
 
 clean:
 	rm -f *.so *.o *.a
-	rm -r libs obj
+	rm -f -r libs obj
 
 .PHONY: clean
 

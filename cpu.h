@@ -136,9 +136,9 @@ private:
     double frequency;
     int interruptLevel;
     int currentInterrupt;
-    bool interruptsMasked = false;
+    bool interruptsMasked;
 
-    int instructionCount = 0;
+    int instructionCount;
     
     VE_VMS_RAM *ram;
     VE_VMS_ROM *rom;
