@@ -112,7 +112,7 @@ else
    CFLAGS += -O3
 endif
 
-OBJECTS := *.cpp
+SRC := *.cpp
 CFLAGS += -Wall -pedantic $(fpic)
 
 ifneq (,$(findstring qnx,$(platform)))
@@ -123,18 +123,16 @@ endif
 
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS)
+$(TARGET): $(SRC)
 ifeq ($(STATIC_LINKING), 1)
-	$(AR) rcs $@ $(OBJECTS)
+	$(AR) rcs $@ $(SRC)
 else
-	$(CC) $(fpic) $(SHARED) $(INCLUDES) -o $@ $(OBJECTS) $(LDFLAGS)
+	$(CC) $(fpic) $(SHARED) $(SRC) $(LDFLAGS) -o $@
 endif
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) $(fpic) -c -o $@ $<
-
 clean:
-	rm -f *.so *.o
+	rm -f *.so *.o *.a
+	rm -r libs obj
 
 .PHONY: clean
 

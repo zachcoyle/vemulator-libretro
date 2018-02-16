@@ -38,8 +38,11 @@ RETRO_API void retro_set_environment(retro_environment_t env)
 	environment_cb = env;
 	
 	//Set variables (Options)
-	options[0] = { "enable_flash_write", "Enable flash write (.bin, requires restart); enabled|disabled"};
-	options[1] = {NULL, NULL};
+	options[0].key = "enable_flash_write"; 
+	options[0].value = "Enable flash write (.bin, requires restart); enabled|disabled";
+	
+	options[1].key = NULL;
+	options[1].value = NULL;
 	
 	env(RETRO_ENVIRONMENT_SET_VARIABLES, options);
 }
@@ -205,9 +208,9 @@ RETRO_API void retro_run(void)
 	processInput();
 	
 	//Cycles passed since last screen refresh
-	uint cyclesPassed = vmu->cpu->getCurrentFrequency() / FPS;
+	size_t cyclesPassed = vmu->cpu->getCurrentFrequency() / FPS;
 	
-	for(uint i = 0; i < cyclesPassed; i++)
+	for(size_t i = 0; i < cyclesPassed; i++)
 		vmu->runCycle();
 
 	//Video
