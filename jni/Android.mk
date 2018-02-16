@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE    := vemulator
+LOCAL_MODULE    := libretro
 LOCAL_CFLAGS :=
 
 ifeq ($(TARGET_ARCH),arm)
